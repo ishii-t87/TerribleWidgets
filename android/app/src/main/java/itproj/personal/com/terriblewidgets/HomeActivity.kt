@@ -5,6 +5,7 @@ import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 
 import kotlinx.android.synthetic.main.activity_home.*
 
@@ -35,5 +36,9 @@ class HomeActivity : AppCompatActivity() {
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    fun sendMessage(view: View) {
+
     }
 }
