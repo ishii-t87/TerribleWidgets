@@ -1,17 +1,31 @@
 package itproj.personal.com.terriblewidgets
 
+import android.support.annotation.IntRange
+
 /**
  *
  * @brief 日付を定義する構造体
  *
  * */
-class DateDefine(year: Int = 1970, month: Int = 1, date: Int = 1, hourOfDay: Int = 0, minute: Int = 0) {
+class DateDefine(@IntRange(from = 1970)year: Int = 1970,
+                 @IntRange(from = 1, to = 12)month: Int = 1,
+                 @IntRange(from = 1, to = 31)date: Int = 1,
+                 @IntRange(from = 0, to = 23)hourOfDay: Int = 0,
+                 @IntRange(from = 0, to = 59)minute: Int = 0) {
 
-    private var mYear: Int = year
-    private var mMonth: Int = month
-    private var mDate: Int = date
-    private var mHourOfDay: Int = hourOfDay
-    private var mMinute: Int = minute
+    var mYear: Int = year
+
+    var mMonth: Int = month
+
+    var mDate: Int = date
+        set(value) {
+            mDate = value
+            checkIllegalValues()
+        }
+
+    var mHourOfDay: Int = hourOfDay
+
+    var mMinute: Int = minute
 
     init {
         checkIllegalValues()
@@ -21,11 +35,6 @@ class DateDefine(year: Int = 1970, month: Int = 1, date: Int = 1, hourOfDay: Int
      * 不正な日時パラメータを検出した場合にexceptionを投げる
      **/
     private fun checkIllegalValues() {
-
-        if (mYear < 1970) throw IllegalArgumentException()
-        if (!(mMonth in 1..12)) throw IllegalArgumentException()
-        if (!(mHourOfDay in 0..23)) throw IllegalArgumentException()
-        if (!(mMinute in 0..59)) throw IllegalArgumentException()
 
         var isValidDate =   false
         when(mDate) {
